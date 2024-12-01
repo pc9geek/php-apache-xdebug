@@ -1,0 +1,17 @@
+services:
+  webserver:
+    build:
+      context: ./docker/php
+    ports:
+      - "8080:80" # Expose Apache port      
+    volumes:
+      - ./app:/var/www/html # Mount your application code
+    environment:
+      XDEBUG_MODE: debug
+      XDEBUG_CLIENT_HOST: host.docker.internal
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
